@@ -267,8 +267,27 @@ def sendSMS(user,otp,mobile):
     f = urllib.request.urlopen(request, data)
     return f.read()
 
+# views.py
+from django.shortcuts import render, redirect
+from .models import Contact
+
 def contact(request):
+    if request.method == 'POST':
+        # Get data from the POST request
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        project = request.POST.get('project')
+        message = request.POST.get('message')
+        print(name, email, project, message)
+        # Save the data into the Contact model
+        contact = Contact(name=name, email=email, project=project, message=message)
+        contact.save()
+        messages.success(request, 'Thank You')
+
+        return redirect('contact') 
+
     return render(request, 'contact.html')
+
 
 
 

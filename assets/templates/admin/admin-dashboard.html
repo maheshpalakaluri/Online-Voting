@@ -210,7 +210,33 @@
       </div>
     </div>
   </div>
-  
+   <!-- Displaying contact information in table format -->
+   <h2 class="my-4">Contact Information</h2>
+   <div class="table-responsive">
+       <table class="table table-striped table-bordered">
+           <thead>
+               <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Email</th>
+                   <th>Subject</th>
+                   <th>Message</th>
+               </tr>
+           </thead>
+           <tbody>
+               {% for contact in contact_info %}
+               <tr>
+                <td>{{ forloop.counter }}</td>  <!-- Serial Number -->
+
+                   <td>{{ contact.name }}</td>
+                   <td>{{ contact.email }}</td>
+                   <td>{{ contact.project }}</td>
+                   <td>{{ contact.message }}</td>
+               </tr>
+               {% endfor %}
+           </tbody>
+       </table>
+   </div>
 </div>
 <!---Container Fluid-->
 </div>

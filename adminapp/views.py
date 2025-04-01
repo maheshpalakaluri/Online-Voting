@@ -6,15 +6,23 @@ from django.core.files.base import ContentFile
 from blockchain_utils import store_hash_on_blockchain
 import base64
 
+# views.py
+from django.shortcuts import render
+from userapp.models import Contact
+
 def admin_dashboard(request):
     elections = ElectionModel.objects.all().count()
     candidates = CandidateModel.objects.all().count()
     votes = VotesModel.objects.all().count()
-    return render(request, 'admin/admin-dashboard.html',{
-        'elections':elections,
-        'candidates':candidates,
-        'votes':votes
+    contact_info = Contact.objects.all()  
+    
+    return render(request, 'admin/admin-dashboard.html', {
+        'elections': elections,
+        'candidates': candidates,
+        'votes': votes,
+        'contact_info': contact_info  
     })
+
 
 def admin_add_election(request):
     if request.method == 'POST':
